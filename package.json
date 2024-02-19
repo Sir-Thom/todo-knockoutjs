@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "gridstack": "^10.1.0",
+    "jquery": "^3.7.1",
     "knockout": "^3.5.1"
   }
 }
