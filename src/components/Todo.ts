@@ -1,21 +1,27 @@
 import * as ko from 'knockout';
-import $ from 'jquery';
-import 'gridstack';
-import { GridStack } from 'gridstack';
+
+
 
 function TodoViewModel(this: any) {
-    var self = this;
+  var self = this;
     self.tasks = ko.observableArray([]);
+    self.newTask = ko.observable(''); 
+
     
-    // Function to add a new task
-    self.addTask = function() {
-        self.tasks.push({ title: ko.observable('New Task') });
+   self.addTask = function() {
+        self.tasks.push({ title: self.newTask(), completed: ko.observable(false) });
+        self.newTask('');
     };
-        
-
-
+    
+    self.addTaskOnEnter = function(data, event) {
+        if (event.keyCode ===  13) { //  13 = Enter 
+            self.addTask();
+        }
+    };
+    
+    self.toggleTaskCompletion = function(task) {
+        task.completed(!task.completed());
+    };
 }
-
 ko.applyBindings(new TodoViewModel());
-
 
