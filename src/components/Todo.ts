@@ -1,22 +1,21 @@
-class TodoView {
-    todos: KnockoutObservableArray<string>;
-    newTodo: KnockoutObservable<string>;
+import * as ko from 'knockout';
+import $ from 'jquery';
+import 'gridstack';
+import { GridStack } from 'gridstack';
 
-    constructor() {
-        this.todos = ko.observableArray([]);
-        this.newTodo = ko.observable('');
-    }
+function TodoViewModel(this: any) {
+    var self = this;
+    self.tasks = ko.observableArray([]);
+    
+    // Function to add a new task
+    self.addTask = function() {
+        self.tasks.push({ title: ko.observable('New Task') });
+    };
+        
 
-    addTodo() {
-        if (this.newTodo()) {
-            this.todos.push(this.newTodo());
-            this.newTodo('');
-        }
-    }
 
-    removeTodo(todo: string) {
-        this.todos.remove(todo);
-    }
 }
 
-ko.applyBindings(new TodoView());
+ko.applyBindings(new TodoViewModel());
+
+
