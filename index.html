@@ -21,10 +21,10 @@
     <div class="divide-y divide-gray-300">
      <ul data-bind="foreach: taskItems" class="divide-y bg-white divide-gray-300 grid-stack">
     <li class="grid-stack-item flex items-center justify-between py-2 drag-handle"
-        data-gs-x="0" data-gs-y="$index">
-        <input type="checkbox" data-bind="checked: isDone" class="mr-2" />
-        <label data-bind="text: task, css: { 'line-through': isDone }"></label>
-        <button class="text-red-500" data-bind="click: $parent.removeTask">Remove</button>
+      data-gs-x="0" data-gs-y="$index">
+      <input type="checkbox" data-bind="checked: isDone, attr: { 'checked': isDone() }" class="mr-2" />
+      <label data-bind="text: task, css: { 'line-through': isDone }"></label>
+      <button class="text-red-500" data-bind="click: $parent.removeTask">Remove</button>
     </li>
 </ul>
 
