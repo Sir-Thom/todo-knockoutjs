@@ -1,35 +1,41 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="./src/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body class="bg-gray-100 h-screen flex justify-center items-center">
-    <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md">
-        <h1 class="text-2xl font-bold mb-4">Todo App</h1>
-        <div class="flex mb-4">
-            <input type="text" class="flex-1 border border-gray-300 rounded-lg py-2 px-4 mr-2 focus:outline-none"
-                placeholder="Add a task..." data-bind="value: newTask, event: { keyup: addTaskOnEnter }">
-            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-                data-bind="click: addTask">Add</button>
-        </div>
-        <div class="divide-y divide-gray-300">
-            <!-- ko foreach: tasks -->
-            <div class="flex items-center py-2">
-              <input type="checkbox" data-bind="checked: completed, click: $parent.toggleTaskCompletion">
-              <span class="flex-1" data-bind="text: title"></span>
-                <button class="text-red-500 hover:text-red-700" data-bind="click: $parent.removeTask">Delete</button>
-            </div>
-            <!-- /ko -->
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="./src/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List</title>
+</head>
+
+<body class="bg-gray-100 h-screen flex justify-center items-center">
+  <div class="max-w-md w-full  bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-4">Todo App</h1>
+    <div class="flex mb-4">
+      <input type="text" class="flex-1 border border-gray-300 rounded-lg py-2 px-4 mr-2 focus:outline-none"
+        placeholder="Add a task..." data-bind="value: taskInput">
+      <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        data-bind="click: addTask">Add</button>
     </div>
+    <div class="divide-y divide-gray-300">
+      <ul data-bind="foreach: taskItems" class="divide-y grid-stack bg-white divide-gray-300">
+      
+<div class="grid-stack-item-content"> <!-- Add Gridstack content class -->
+      <li class="flex  items-center justify-between py-2 drag-handle">
+        <input type="checkbox" data-bind="checked: isDone" class="mr-2" />
+        <label data-bind="text: task, css: { 'line-through': isDone }"></label>
+        <button class="text-red-500" data-bind="click: $parent.removeTask">Remove</button>
+        </li>
+    </div>
+      </ul>
+    </div>
+  </div>
 
-</div>
-    <script type="module" src="/src/components/Todo.ts">
+  </div>
+  <script type="module" src="/src/components/Todo.ts">
 
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

@@ -1,27 +1,34 @@
+import { GridStack } from 'gridstack';
 import * as ko from 'knockout';
+//let grid = GridStack.init({ cellHeight:  70 , draggable: { handle: '.drag-handle' }, staticGrid: false });
 
-
+function taskItem(this: any, task, isDone) {
+  this.task = ko.observable(task);
+  this.isDone = ko.observable(isDone);
+}
 
 function TodoViewModel(this: any) {
-  var self = this;
-    self.tasks = ko.observableArray([]);
-    self.newTask = ko.observable(''); 
+    
+    var self = this;
+    self.taskInput = ko.observable("");
+    self.taskItems = ko.observableArray([]);
+    
+    self.addTask = function() {
+        self.taskItems.push(new taskItem(self.taskInput(), false));
+        self.taskInput("");
+      
 
-    
-   self.addTask = function() {
-        self.tasks.push({ title: self.newTask(), completed: ko.observable(false) });
-        self.newTask('');
     };
-    
-    self.addTaskOnEnter = function(data, event) {
-        if (event.keyCode ===  13) { //  13 = Enter 
-            self.addTask();
-        }
+
+
+    self.removeTask = function(task: any) {
+        
+        self.taskItems.remove(task);
     };
-    
-    self.toggleTaskCompletion = function(task) {
-        task.completed(!task.completed());
-    };
+   
+
+    //grid.load(self.taskItems().slice());
 }
+
 ko.applyBindings(new TodoViewModel());
 
